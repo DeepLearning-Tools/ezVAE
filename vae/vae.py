@@ -14,7 +14,7 @@ class VAE:
         self.dense_size = dense_size
         self.batch_size = batch_size
         self.root = ""
-        self.model = 1
+        self.model = model
 
     def train(self, x_train, x_test):
         self.input_dimension = x_train.shape[1]
