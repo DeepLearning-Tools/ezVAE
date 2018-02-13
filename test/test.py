@@ -5,6 +5,8 @@
 # 3. GAUSSIAN MIXTURES VS MNIST ETC.
 # -------------------------------------------
 from vae import VAE
+from tsne_visual import TSNE
+from fdc import plotting
 from keras.datasets import mnist
 import numpy as np
 import time
@@ -18,27 +20,14 @@ def main():
     x_train=np.reshape(x_train, (len(x_train), 784))
     x_test=np.reshape(x_test, (len(x_test), 784))
 
-    time.sleep(5)
-    model = VAE()
-    model.train(x_train[:10000],x_test)
+    model = VAE(drop_rate = 0.3, epoch = 50)
+    #model.train(x_train[:10000], x_test)
+    model.load()
+    x_latent = model.predict(x_train[:10000])
+    print(x_latent.shape)
     exit()
-
-
-    name = 'noiseVAE_noise0p2.h5'
-    fname = root+name # for loading vae model in case u need it
-    #test(y_train[:10000])
-    #exit()
-    VAE = load_model(fname) 
-    #VAE = train_model(x_train[:10000], x_test, root=root, name=name, drop_rate = 0.2, epoch = 500)
-    #exit()
-    xvae = VAE.predict(x_train[:10000])
-    pickle.dump(xvae, open('xvae_test.pkl','wb'))
+    x_tsne = TSNE(n_iter = 2000).fit_transform(x_latent)
+    plotting.cluster_w_label(x_tsne, y_train[:10000])
     
-    exit()
-    #xpca = PCA(n_components=80).fit_transform(xvae)
-    xtsne = tsne_model(x_train[:10000], savefile = 'test.pkl', n_iter = 5000)
-    #xtsne = tsne_model(xvae, savefile = 'tsne_drop0p2_angle0p5.pkl', n_iter = 5000)
-    plot_w_label(xtsne, y_train[:10000])
-
 if __name__ == "__main__":
-    main()
+    main() 

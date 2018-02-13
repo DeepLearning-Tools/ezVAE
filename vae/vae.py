@@ -49,7 +49,7 @@ class VAE:
     def predict(self, x):
         return self.encoder_model.predict(x)
 
-    def load_model(self, name=None):
+    def load(self, name=None):
         if name is None:
             self.encoder_model = lmm(self.name)
         else:
