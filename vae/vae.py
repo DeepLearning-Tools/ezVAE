@@ -7,13 +7,14 @@ import tensorflow as tf
 
 class VAE:
     
-    def __init__(self, name='tmp.h5', drop_rate = 0.7, epoch=50, dense_size=1000, batch_size=256):
+    def __init__(self, name='tmp.h5', drop_rate = 0.7, epoch=50, dense_size=1000, batch_size=256, model=1):
         self.name = name
         self.drop_rate = drop_rate
         self.epoch = epoch
         self.dense_size = dense_size
         self.batch_size = batch_size
         self.root = ""
+        self.model = 1
 
     def train(self, x_train, x_test):
         self.input_dimension = x_train.shape[1]
@@ -22,8 +23,11 @@ class VAE:
         input_img = Input(shape=(self.input_dimension,))  # adapt this if using `channels_first` image data format
         x = Dropout(self.drop_rate)(input_img)
         encoded = Dense(self.dense_size, activation='relu', name='encoder')(x) # need to save weigths and biases of this
-        x = Dropout(self.drop_rate)(encoded)
-        decoded = Dense(self.input_dimension, activation='relu')(x)
+        if self.model == 1:
+            x = Dropout(self.drop_rate)(encoded)
+            decoded = Dense(self.input_dimension, activation='relu')(x)
+        elif self.model == 2:
+            decoded = Dense(self.input_dimension, activation='relu')(encoded) # decode directly ?!
 
         autoencoder = Model(input_img, decoded)
         autoencoder.compile(optimizer='adadelta', loss='binary_crossentropy') # here pixels are set between 0 and 1.

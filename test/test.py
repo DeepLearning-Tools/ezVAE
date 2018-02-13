@@ -15,6 +15,8 @@ def main():
 
     root = '/Users/alexandreday/Desktop/clustering-references/analysis/'
     (x_train, y_train), (x_test, y_test) = mnist.load_data()
+
+    """ Note here that everything should be scaled between 0 and 1 ! """
     x_train = x_train.astype('float32') / 255.
     x_test = x_test.astype('float32') / 255.
     x_train=np.reshape(x_train, (len(x_train), 784))
