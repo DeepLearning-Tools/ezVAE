@@ -1,5 +1,4 @@
 from .vae import VAE
-import .utility
-
+from . import utility
 
 __all__ = ['VAE']
