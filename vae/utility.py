@@ -7,9 +7,10 @@ param_type = OrderedDict({
     'model':int,
     'dense_size':int,
     'batch_size':int,
-    'name':str
+    'name':str,
+    'root':str
     }
-    )
+)
 
 def read_command_line():
 

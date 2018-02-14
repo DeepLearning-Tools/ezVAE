@@ -8,7 +8,7 @@ from . import utility as ut
 
 class VAE:
     
-    def __init__(self, name=None, drop_rate = 0.7, epoch=50, dense_size=1000, batch_size=256, model=1):
+    def __init__(self, name=None, drop_rate = 0.7, epoch=50, dense_size=1000, batch_size=256, model=1, root = ""):
         self.name = name
         self.drop_rate = drop_rate
         self.epoch = epoch
@@ -17,7 +17,7 @@ class VAE:
         self.model = model
         self.info()
         if self.name is None:
-            self.name = ut.make_file_name(self.__dict__)
+            self.name = root+ut.make_file_name(self.__dict__)
     
     def info(self):
         print(self.__dict__)
