@@ -8,7 +8,8 @@ param_type = OrderedDict({
     'dense_size':int,
     'batch_size':int,
     'name':str
-    })
+    }
+    )
 
 def read_command_line():
 
@@ -25,5 +26,5 @@ def read_command_line():
     return cmd
 
 def make_file_name(param):
-    p = ["dr=%.2f"%param['drop_rate'],"epoch=%i"%param['epoch'],"mod=%i"%param['model'],"i"%param['dense_size'],"i"%param['batch_size']]
+    p = ["dr=%.2f"%param['drop_rate'],"epoch=%i"%param['epoch'],"mod=%i"%param['model'],"dense=%i"%param['dense_size'],"batch=%i"%param['batch_size']]
     return "VAE_" + "_".join(p) + ".h5"
