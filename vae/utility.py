@@ -29,3 +29,7 @@ def read_command_line():
 def make_file_name(param):
     p = ["dr=%.2f"%param['drop_rate'],"epoch=%i"%param['epoch'],"mod=%i"%param['model'],"dense=%i"%param['dense_size'],"batch=%i"%param['batch_size']]
     return "VAE_" + "_".join(p) + ".h5"
+
+def make_file_name_tsne(param):
+    p = ["dr=%.2f"%param['drop_rate'],"epoch=%i"%param['epoch'],"mod=%i"%param['model'],"dense=%i"%param['dense_size'],"batch=%i"%param['batch_size']]
+    return "tsne_" + "_".join(p) + ".pkl"
