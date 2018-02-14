@@ -4,22 +4,24 @@ import numpy as np
 from keras import backend as K
 from keras.models import load_model as lmm
 import tensorflow as tf
+from . import utility as ut
 
 class VAE:
     
-    def __init__(self, name='tmp.h5', drop_rate = 0.7, epoch=50, dense_size=1000, batch_size=256, model=1):
+    def __init__(self, name=None, drop_rate = 0.7, epoch=50, dense_size=1000, batch_size=256, model=1):
         self.name = name
         self.drop_rate = drop_rate
         self.epoch = epoch
         self.dense_size = dense_size
         self.batch_size = batch_size
-        self.root = ""
         self.model = model
         self.info()
+        if self.name is None:
+            self.name = ut.make_file_name(self.__dict__)
     
     def info(self):
         print(self.__dict__)
-        
+
     def train(self, x_train, x_test):
         self.input_dimension = x_train.shape[1]
 
@@ -51,7 +53,7 @@ class VAE:
         encoder = Dense(self.dense_size, activation='relu', name='first')(input_img)
         encoder_model = Model(input=input_img, output=encoder)
         encoder_model.set_weights([layer.get_weights()[0]*(1-self.drop_rate),layer.get_weights()[1]]) # rescaling weights here
-        encoder_model.save(self.root+self.name) # use encoder_model.predict(x) to output a 1000 dim representation
+        encoder_model.save(self.name) # use encoder_model.predict(x) to output a 1000 dim representation
         self.encoder_model = encoder_model
 
     def predict(self, x):
@@ -62,3 +64,4 @@ class VAE:
             self.encoder_model = lmm(self.name)
         else:
             self.encoder_model = lmm(name)
+    
