@@ -4,7 +4,7 @@ import numpy as np
 from keras import backend as K
 from keras.models import load_model as lmm
 import tensorflow as tf
-import .utility as ut
+from . import utility as ut
 
 class VAE:
     
