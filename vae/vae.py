@@ -15,7 +15,11 @@ class VAE:
         self.batch_size = batch_size
         self.root = ""
         self.model = model
-
+        self.info()
+    
+    def info(self):
+        print(self.__dict__)
+        
     def train(self, x_train, x_test):
         self.input_dimension = x_train.shape[1]
 

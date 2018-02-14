@@ -22,12 +22,12 @@ def main():
     x_train=np.reshape(x_train, (len(x_train), 784))
     x_test=np.reshape(x_test, (len(x_test), 784))
 
-    model = VAE(drop_rate = 0.3, epoch = 50)
+    model = VAE(drop_rate = 0.3, epoch = 50, model=2)
     #model.train(x_train[:10000], x_test)
     model.load()
     x_latent = model.predict(x_train[:10000])
-    print(x_latent.shape)
-    exit()
+    #print(x_latent.shape)
+    #exit()
     x_tsne = TSNE(n_iter = 2000).fit_transform(x_latent)
     plotting.cluster_w_label(x_tsne, y_train[:10000])
     
