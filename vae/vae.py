@@ -8,7 +8,7 @@ from . import utility as ut
 
 class VAE:
     
-    def __init__(self, name=None, drop_rate = 0.7, epoch=50, dense_size=1000, batch_size=256, model=1, root = ""):
+    def __init__(self, name=None, drop_rate = 0.7, epoch=50, dense_size=1000, batch_size=256, model=1, root = "models/"):
         self.name = name
         self.drop_rate = drop_rate
         self.epoch = epoch
