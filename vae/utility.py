@@ -8,7 +8,8 @@ param_type = OrderedDict({
     'dense_size':int,
     'batch_size':int,
     'name':str,
-    'root':str
+    'root':str,
+    'verbose':int
     }
 )
 

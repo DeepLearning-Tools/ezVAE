@@ -8,13 +8,14 @@ from . import utility as ut
 
 class VAE:
     
-    def __init__(self, name=None, drop_rate = 0.7, epoch=50, dense_size=1000, batch_size=256, model=1, root = "models/"):
+    def __init__(self, name=None, drop_rate = 0.7, epoch=50, dense_size=1000, batch_size=256, model=1, root = "models/", verbose=0):
         self.name = name
         self.drop_rate = drop_rate
         self.epoch = epoch
         self.dense_size = dense_size
         self.batch_size = batch_size
         self.model = model
+        self.verbose = verbose
         self.info()
         if self.name is None:
             self.name = root+ut.make_file_name(self.__dict__)
@@ -44,7 +45,8 @@ class VAE:
                         epochs = self.epoch,
                         batch_size=self.batch_size,
                         shuffle=True,
-                        validation_data=(x_test, x_test)
+                        validation_data=(x_test, x_test),
+                        verbose = self.verbose
         )
 
         # getting rid of decoding and noising layers, return only the dense layer.
