@@ -1,3 +1,6 @@
+"""
+Alexandre Day, Nov 10 2017
+"""
 from keras.layers import Input, Dense, Dropout
 from keras.models import Model
 import numpy as np
